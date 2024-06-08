@@ -1,0 +1,6 @@
+@Dogrest_HostAddress = http://localhost:5067
+
+GET {{Dogrest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
