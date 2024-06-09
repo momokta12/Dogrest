@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog</title>
+</head>
+<body>
+    <div id="app" class="container mt-5">
+        <h1>Dog Management</h1>
+
+        <!-- Table for displaying dogs -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <!-- <th>Name</th>
+                    <th>Age</th> -->
+                    <!-- Efter ændringer -->
+                    <th>
+                        Name
+                        <button @click="SortByName" class="btn btn-sm btn-primary">Sort by Name</button>
+                    </th>
+                    <th>
+                        Age
+                        <button @click="SortByAge" class="btn btn-sm btn-primary">Sort by Age</button>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="dog in dogs" :key="dog.id">
+                    <td>{{ dog.id }}</td>
+                    <td>{{ dog.name }}</td>
+                    <td>{{ dog.age }}</td>
+                    <td>
+                        <!-- Før ændringer
+                        <button @click="GetDogs">GetAll</button>
+                        -->
+                        <!-- Efter ændringer -->
+                        <button @click="DeleteDog(dog.id)" class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Form for adding a new dog -->
+        <div class="mb-4">
+            <h2>Add a New Dog</h2>
+            <input v-model="newDog.id" placeholder="Enter id" class="form-control mb-2">
+            <input v-model="newDog.name" placeholder="Enter name" class="form-control mb-2">
+            <input v-model="newDog.age" placeholder="Enter age" class="form-control mb-2" type="number">
+            <button @click="AddDog" class="btn btn-success">Create</button>
+            <p>{{ addMessage }}</p>
+        </div>
+
+        <!-- Search by ID or Name -->
+        <div class="mb-4">
+            <h2>Search</h2>
+            <input v-model="searchId" placeholder="Enter id or name to search" class="form-control mb-2">
+            <button @click="getById(searchId)" class="btn btn-primary mb-2">Search by ID</button>
+            
+            
+            <input v-model="searchName" placeholder="Enter name to filter" class="form-control mb-2">
+            <button @click="FilterByName" class="btn btn-primary mb-2">Filter by Name</button>
+            <div v-if="searchResult">
+                <h3>Search Result</h3>
+                <p>ID: {{ searchResult.id }}</p>
+                <p>Name: {{ searchResult.name }}</p>
+                <p>Age: {{ searchResult.age }}</p>
+            </div>
+        </div>
+    </div>
+    <script src="Dog22.js"></script>
+</body>
+</html>
